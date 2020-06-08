@@ -1,9 +1,9 @@
 
-package vehiculo;
+package expvehiculo;
 import java.awt.Color;
 public class Vehiculo {
      private String marca;
-     private enum TIPO{Familiar,Personal,chofer};
+     private enum TIPO {Familiar,Personal,chofer};
      private int modelo;
      private int numPasajeros;
      private int numPuertas;
@@ -56,6 +56,10 @@ public class Vehiculo {
      }
      public String getpersonaPropietario(){
          return personaPropietario;
+     }
+     
+     public double getKilometraje () {
+         return kilometraje;
      }
     public static void main(String[] args) {
         Vehiculo v1= new Vehiculo ("Chevrolet");

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package carro;
+package expvehiculo;
 
 /**
  *
  * @author mugiwara
  */
 
-public class Carro {
+public class Carro extends Vehiculo {
 
         enum real {lb,kg};
         enum Modo {standar, automatico};
@@ -18,13 +18,13 @@ public class Carro {
         
         private real peso;
         private Transmision trans;
-        int caballosDeFuerza;
-        String tipoMotor;
-        int modelo;
-        String tipoGasolina;
-        int capacidadTanque;
-        String tarjetaCirculacion;
-        Modo modo;
+        private int caballosDeFuerza;
+        private String tipoMotor;
+        private int modelo;
+        private String tipoGasolina;
+        private int capacidadTanque;
+        private String tarjetaCirculacion;
+        private Modo modo;
 
     public Carro() {
         this.peso = peso.lb;
@@ -35,6 +35,17 @@ public class Carro {
         this.tarjetaCirculacion = "191312fasfc41412";
         this.modo = modo.automatico;
     }
+    
+    public Carro (String marca) {
+        super (marca);
+        this.peso = peso.kg;
+        this.trans = trans.automatica;
+        this.tipoMotor = "16 cilindros";
+        this.modelo = 2020;
+        this.tipoGasolina = "magna";
+        this.tarjetaCirculacion = "POO-UAM";
+        this.modo = modo.automatico;
+    } 
         
         
 
@@ -52,18 +63,14 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "el carro tiene peso en : "+peso.kg+", la transmision es: "+trans.manual
+        return "Como vehículo" + super.toString() + "\nel carro tiene peso en : "+peso +", la transmision es: "+ trans
         +", tipoMotor: "+tipoMotor+""+", modelo"+modelo+", tipo de gasolina"+tipoGasolina+", tarjeta "
         +" de circulacion"+tarjetaCirculacion+", tipo modo"+modo+ "\n";
     }
     
-    public int servicio(int kilo){
-        if(kilo==0)
-            System.out.println("No necesita servicio");
-        return 0;
-        elseif(kilo==1) 
-         System.out.println("ya tuvo servicio");
-        return 1; 
+    public void servicio(){
+        if (getKilometraje() % 5000 >= 0)
+            System.out.println ("El carro está en servicio");
     }
     
     void levantarInfraccion(){
@@ -82,6 +89,11 @@ public class Carro {
        Carro carro1 = new Carro();
        
        System.out.println(carro1.toString());
+       
+       Carro c2 = new Carro ("Honda");
+       c2.avanza (5010);
+       c2.servicio ();
+       System.out.println (c2);
      
        }
     

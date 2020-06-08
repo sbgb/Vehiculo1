@@ -1,7 +1,8 @@
+package expVehiculo;
 
 import java.awt.Color;
 
-public class Deportivo {
+public class Deportivo extends Carro {
 
     private boolean convertible;
 

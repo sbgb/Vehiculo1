@@ -1,6 +1,6 @@
 package vehiculo;
 import java.awt.Color;
-public class Vehiculo {
+public class Vehiculo2 {
      private String marca;
      private enum TIPO{Familiar,Personal,chofer};
      private int modelo;

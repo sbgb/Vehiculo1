@@ -1,9 +1,9 @@
-
+package expVehiculo;
 import java.time.Instant;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-public class Camion {
+public class Camion extends Vehiculo{
 
     private int numEjes;
     private boolean tipoCarga;
