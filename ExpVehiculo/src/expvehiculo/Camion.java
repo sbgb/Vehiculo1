@@ -1,4 +1,4 @@
-package expVehiculo;
+package expvehiculo;
 import java.time.Instant;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -11,9 +11,17 @@ public class Camion extends Vehiculo{
     private int tipoRemolque;
     private int numCilindros;
     private int numPasajeros;
-    private Boolean tipoCamion;
+    private boolean tipoCamion;
     private float peso;
     private float balance;
+    
+    
+    public Camion() {
+    }
+    
+        Camion (int llantas) {
+        this.numLlantas = llantas;
+    }
 
     public Camion(String a) {
         String cadena = (String) a;
@@ -30,14 +38,8 @@ public class Camion extends Vehiculo{
 
     }
 
-    public Camion() {
-
-    }
-
     public String toString() {
-
         return this.numEjes + " " + this.tipoCarga + " " + this.numLlantas + " " + this.tipoRemolque + " " + this.numCilindros + " " + this.numPasajeros + " " + this.peso + " " + this.balance;
-
     }
 
     public boolean equals(Object o) {
@@ -62,9 +64,9 @@ public class Camion extends Vehiculo{
         return false;
     }
 
-    public int servicio() {
+    int servicio() {
         //No entiendo que hace el metodo servicio :(
-        return 0;
+        return 5;
     }
 
     public Camion clone() {
@@ -96,6 +98,11 @@ public class Camion extends Vehiculo{
         return a * carga;
 
     }
+    
+    int getLlantas () {
+        return numLlantas;
+    }
+    
 
     public boolean ruta(Date inicio, Date fin) {
        //aqui creo que seria mejor utilizar la clase Calendar but idk       

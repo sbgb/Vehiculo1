@@ -1,13 +1,13 @@
 /*
  * HERENCIA: Sub-Clase CamiónPasajeros de Clase-Hijo Camión
  */
-package vehículo;
+package expvehiculo;
 import java.awt.Color;
 
-public class CamiónPasajeros extends Camión {
+public class CamiónPasajeros extends Camion {
     
     private enum Ruta { 
-        ROSARIO, UAMA, FERRERÍA, ESPECIAL;
+        ROSARIO, UAMA, FERRERÍA, ESPECIAL, SINRUTA;
     }
     
     private enum Abordaje { 
@@ -15,7 +15,7 @@ public class CamiónPasajeros extends Camión {
     }
       
     private enum Pasajero {
-        EXTERNO, TRABAJADOR, ACADÉMICO, ESTUDIANTE;
+        EXTERNO, TRABAJADOR, ACADÉMICO, ESTUDIANTE, NINGUNO;
     }  
           
     private Ruta ruta;
@@ -30,11 +30,16 @@ public class CamiónPasajeros extends Camión {
             
     //MÉTODOS CONSTRUCTORES
     CamiónPasajeros () {
-        this.cuota = 10.00;
-        this.lugdisponibles = 20;
-        this.mecfalla = false;
-        this.intdaño = false;
-        Tcolor = Color.WHITE;
+        this.ruta = Ruta.SINRUTA;
+        this.abordaje = Abordaje.NORMAL;
+        this.pasajero = Pasajero.NINGUNO;
+        this.cuota = 10.00;       //Cuota Inicial de cobro para cualquier viaje
+        this.lugdisponibles = 20; //Mínimo de lugares para que sea un  
+                                    //Camión de Pasajeros
+        this.puertas = "Puertas Cerradas"; //Estado Inicial de la puerta
+        this.mecfalla = false;    //Inicialmente no hay falla mecánica ni daños
+        this.intdaño = false;       //en el interior
+        Tcolor = Color.WHITE;       //De fábrica los camiones están en blanco
     }
     
     CamiónPasajeros (Ruta ruta, double cuota, Color color, int llantas) {
@@ -62,10 +67,10 @@ public class CamiónPasajeros extends Camión {
         mecfalla = mec;
         intdaño = intd;
         if (mecfalla == true & intdaño == true ) {
-            return " Se necesitarán " + (super.Servicio())*2 + " días de servicio para reparar tu unidad " + Tcolor + ".";
+            return " Se necesitarán " + (super.servicio())*2 + " días de servicio para reparar tu unidad " + Tcolor + ".";
         }
         if (mecfalla == true ^ intdaño == true  ) {
-            return " Se necesitarán " + super.Servicio() + " días de servicio para reparar tu unidad " + Tcolor + ".";
+            return " Se necesitarán " + super.servicio() + " días de servicio para reparar tu unidad " + Tcolor + ".";
         }
         else
             return " ¡Excelente! Tu Unidad " + Tcolor + " No Necesita Servicio.";
@@ -79,6 +84,22 @@ public class CamiónPasajeros extends Camión {
         if (pasaje == Pasajero.ACADÉMICO) { c -= (c*0.30); }
         if (pasaje == Pasajero.ESTUDIANTE) { c -= (c*0.40); }        
         return c;
+    }
+    
+    void PuertasCerradas (double velocity) {
+        if (super.avanza(velocity) == 100) //Suponiendo que en cada ruta hay 5
+            puertas = " Puertas estan Abiertas "; // estaciones situada cada una 
+        if (super.avanza(velocity) == 101)        // a 100km de la anterior
+            puertas = " Puertas estan Abiertas "; 
+        if (super.avanza(velocity) == 102) 
+            puertas = " Puertas estan Abiertas "; 
+                if (super.avanza(velocity) == 103) 
+            puertas = " Puertas estan Abiertas "; 
+        if (super.avanza(velocity) == 104) 
+            puertas = " Puertas estan Abiertas "; 
+        else
+            puertas = " Puertas estan Cerradas "; 
+        System.out.println("Se han recorrido: " + getKilometraje () + "km. Entonces las " + puertas);   
     }
     
     void DisponibilidadActual (int subidas, int bajadas) {
@@ -108,6 +129,7 @@ public class CamiónPasajeros extends Camión {
         System.out.println (" Nuevo pasajero... El precio por viajar es de: $" 
                 + camión3.Cobro (Abordaje.POINTOPOINT, Pasajero.EXTERNO) + ". ¡Gracias por su preferencia! ");
         camión3.DisponibilidadActual (18, 7);
+        camión3.PuertasCerradas(0.1);
         
     
     }
