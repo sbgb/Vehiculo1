@@ -1,23 +1,30 @@
-package expvehiculo;
+package expVehiculo;
 
 // ************** O ************** O  ************** O  ************** O  **************
 //             CLASE CAMION CARGA
 // ************** O ************** O  ************** O  ************** O  **************
 // CamionCarga c = new CamionCarga(1, "POR DEFINIR", 6, 1, 12, 2, true, 80000, 10, false, false, 50000);
-public class CamionCarga extends Camion1{
+public class CamionCarga extends Camion{
     private boolean refrigerada;
     private boolean cajaCerrada;
     private double cargaEstimada;   // Definida en kilos.
     private TipoCargaRemolque tipoCargaRemolque;
     private boolean luces;
-    // CONSTRUCTOR.
-    /**
-     * @param numEjes Numero de ejes
-     * @param tipoCarga Tipo de carga.
     
-    */
+    // CONSTRUCTOR.
+    public CamionCarga(){}
+    
     public CamionCarga(int numEjes, String tipoCarga, int numLlantas, int tipoRemolque, int numCilindros, int numPasajeros, boolean tipoCamion, float peso, float balance, boolean refrigerada, boolean cajaCerrada, double cargaEstimada) {
-        super(numEjes, tipoCarga, numLlantas, tipoRemolque, numCilindros, numPasajeros, tipoCamion, peso, balance);
+        //super(numEjes, tipoCarga, numLlantas, tipoRemolque, numCilindros, numPasajeros, tipoCamion, peso, balance);
+        this.cajaCerrada = false;
+        this.refrigerada = false;
+        this.cargaEstimada = cargaEstimada;
+        this.tipoCargaRemolque = TipoCargaRemolque.NoPermitido;
+        this.luces = false;
+    }
+    
+    public CamionCarga(String token, boolean refrigerada, boolean cajaCerrada, double cargaEstimada) {
+        super(token);
         this.cajaCerrada = false;
         this.refrigerada = false;
         this.cargaEstimada = cargaEstimada;
@@ -99,10 +106,14 @@ public class CamionCarga extends Camion1{
         return super.toString() + "\nEstado de luces:" + EstadoLuces() + "\nTipo de carga remolque: " + tipoCargaRemolque.toString();
     }
 
-public CamionCarga Clone(){
-CamionCarga cClone = new CamionCarga(this.numEjes, this.tipoCarga, this.numLlantas, this.tipoRemolque, this.numCilindros, this.numPasajeros, this.tipoCamion, this.peso, this.balance, this.refrigerada, this.cajaCerrada, this.cargaEstimada); cClone.tipoCargaRemolque = this.tipoCargaRemolque;
-cClone.luces = this.luces;
-return cClone;
+public CamionCarga clone(){
+// Sin acceso a datos miembro de la clase Camion :(
+//CamionCarga cClone = new CamionCarga(this.numEjes, this.tipoCarga, this.numLlantas, this.tipoRemolque, this.numCilindros, this.numPasajeros, this.tipoCamion, this.peso, this.balance, this.refrigerada, this.cajaCerrada, this.cargaEstimada); cClone.tipoCargaRemolque = this.tipoCargaRemolque;
+//CamionCarga cClone = new CamionCarga((this.numEjes + " " + this.tipoCarga + " " + this.numLlantas + " " + this.tipoRemolque + " " + this.numCilindros + " " + this.numPasajeros + " " + this.tipoCamion + " " + this.peso + " " + this.balance), this.refrigerada, this.cajaCerrada, this.cargaEstimada); cClone.tipoCargaRemolque = this.tipoCargaRemolque;
+//cClone.luces = this.luces;
+//return cClone;
+CamionCarga c = new CamionCarga();
+return c;
 }
 
     enum TipoCargaRemolque {
@@ -119,6 +130,17 @@ return cClone;
         GigaPesado,     // 23 ton. y 26 ton.
         SuperPesado,     // 40 ton. y 250 ton.
         NoPermitido
+    }
+    public static void main(String[] args) {
+        //CamionCarga c = new CamionCarga(1, "POR DEFINIR", 6, 1, 12, 2, true, 80000, 10, false, false, 50000);
+        CamionCarga c = new CamionCarga("1 false 6 1 12 2 true 80000 10", false, false, 50000);
+        //CamionCarga c1 = c.Clone();
+        System.out.println(c.toString() + "\n");
+        System.out.println("Encendiendo luces y asignando tipo de remolque de carga...\n");
+        c.OnOffLuzExterna();
+        c.AsignaCargaRemolque();
+        System.out.println(c.toString());
+        //System.out.println("Clonado: " + c1.toString());
     }
 }
 // ************** O ************** O  ************** O  ************** O  **************
